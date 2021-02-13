@@ -20,8 +20,6 @@ gulp.task('serve', gulp.series(['sass']), function () {
     });
 });
 
-
-
 //Watcher
 gulp.task('watch', function () {
     gulp.watch('sass/**/*.sass', gulp.series(['sass']));
