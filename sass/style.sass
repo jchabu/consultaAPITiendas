@@ -1,3 +1,7 @@
+$azulMedio : cornflowerblue
+$azulOscuro: darkblue
+$azulFlojo: lightblue
+    
 @font-face
     font-family: Oxygen Bold
     font-style: normal
@@ -11,30 +15,110 @@
     font-style: normal
     src: local("../fonts/Oxygen-Light.ttf")
 
-h1, h2
+h1, h2, h3
     color: darkblue
     font-family: Oxygen Bold
 h1
-    background-color: cornflowerblue
+    background-color: $azulMedio
     height: 100px
     display: flex
     justify-content: center
     align-items: center
-    border: darkblue 5px solid
+    border: $azulOscuro 5px solid
     margin: 0
 body
     margin: 0
 button
-    background-color: lightblue
+    background-color: white
     height: 30px
     width: 20em
     border-radius: 5px
-    color: darkblue
+    color: $azulOscuro
     font-family: Oxygen Bold
     font-weight: bold
     margin: 10px
+    &:hover
+        background-color: $azulMedio
+    &:active
+        background-color: $azulFlojo
+
 .seleccion
     margin-top: 200px
     display: flex
     flex-direction: column
     align-items: center
+
+.listado
+    display: flex
+    flex-direction: column
+    align-items: center
+    margin-top: 2em
+
+.tarjeta
+    border: 3px solid $azulOscuro
+    background-color: $azulMedio
+    width: 90%
+    margin-bottom: 1em
+    display: flex
+    flex-direction: column
+    align-items: center
+    border-radius: 15px
+    h3
+        color: $azulFlojo
+
+// Metodo de espera de 
+.lds-ellipsis
+        display: inline-block
+        position: relative
+        width: 80px
+        height: 80px
+
+.lds-ellipsis div
+    position: absolute
+    top: 33px
+    width: 13px
+    height: 13px
+    border-radius: 50%
+    background: #fff
+    animation-timing-function: cubic-bezier(0, 1, 1, 0)
+
+
+    &:nth-child(1)
+        left: 8px
+        animation: lds-ellipsis1 0.6s infinite
+
+
+    &:nth-child(2)
+        left: 8px
+        animation: lds-ellipsis2 0.6s infinite
+
+
+    &:nth-child(3)
+        left: 32px
+        animation: lds-ellipsis2 0.6s infinite
+
+
+    &:nth-child(4)
+        left: 56px
+        animation: lds-ellipsis3 0.6s infinite
+
+@keyframes lds-ellipsis1
+    0%
+        transform: scale(0)
+
+    100%
+        transform: scale(1)
+
+@keyframes lds-ellipsis3
+    0%
+        transform: scale(1)
+
+    100%
+        transform: scale(0)
+
+@keyframes lds-ellipsis2
+    0%
+        transform: translate(0, 0)
+
+    100%
+        transform: translate(24px, 0)
