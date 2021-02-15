@@ -67,6 +67,51 @@ button {
   .tarjeta h3 {
     color: lightblue; }
 
+.oculto {
+  display: none; }
+
+.botones {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 80px;
+  margin-right: 80px; }
+
+.buscador .barraBusqueda {
+  height: 24px;
+  margin-right: -2px; }
+
+.buscador .botonBusqueda {
+  width: 3em;
+  margin-left: 0;
+  margin-top: 15px;
+  color: cornflowerblue;
+  background-color: white; }
+  .buscador .botonBusqueda:hover {
+    background-color: cornflowerblue;
+    color: white; }
+  .buscador .botonBusqueda:active {
+    background-color: lightblue;
+    color: white; }
+
+.contNuevaTienda {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: stretch;
+  margin-left: 80px;
+  margin-right: 80px;
+  border: darkblue 3px solid;
+  height: 10em;
+  flex-wrap: wrap; }
+  .contNuevaTienda input {
+    width: 50%;
+    border: 2px solid black; }
+  .contNuevaTienda input {
+    display: block; }
+  .contNuevaTienda label {
+    font-family: Oxygen Bold;
+    color: darkblue; }
+
 .lds-ellipsis {
   display: inline-block;
   position: relative;

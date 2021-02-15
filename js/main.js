@@ -10,6 +10,7 @@ var contenedorMain = document.body.children[1];
 function tiendaXHR() {
     limpiarMain();
     imprimirForma("XHR");
+    var contenedorOculto = document.getElementsByClassName('oculto')[0]
     listaXHR();
 }
 
@@ -43,17 +44,34 @@ function printSeleccion() {
     contenedorMain.appendChild(menuSeleccion);
 }
 
-function imprimirForma(tipoSeleccion) {
+function imprimirForma() {
     contenedorMain.appendChild(createNode("div", "", ["navegacion"], []));
+    contenedorMain.lastChild.appendChild(createNode("div", "", ["botones"], []));
     var btnNuevaTienda = createNode("button", "Nueva Tienda", ["boton"], [])
-    if (tipoSeleccion === "Fetch") {
-        //btnNuevaTienda.addEventListener('click', nuevaTienda);
-    } else if (tipoSeleccion === "XHR") {
-        //btnNuevaTienda.addEventListener('click', nuevaTienda);
-    } else {
-        //btnNuevaTienda.addEventListener('click', nuevaTienda);
-    }
-    contenedorMain.lastChild.appendChild(btnNuevaTienda);
+
+    contenedorMain.lastChild.lastChild.appendChild(btnNuevaTienda);
+    contenedorMain.lastChild.lastChild.appendChild(createNode("form", "", ["buscador"], []));
+    contenedorMain.lastChild.lastChild.lastChild.appendChild(createNode("input", "", ["barraBusqueda"], [{ name: "type", value: "text" }]));
+    contenedorMain.lastChild.lastChild.lastChild.appendChild(createNode("button", "", ["botonBusqueda"], [{ name: "type", value: "submit" }]));
+    contenedorMain.lastChild.lastChild.lastChild.lastChild.appendChild(createNode("i", "", ["fas", "fa-search"], [{}]));
+    // <i class='fas fa-search'></i>
+    contenedorMain.lastChild.appendChild(createNode("div", "", ["oculto", "contNuevaTienda"], []));
+    contenedorMain.lastChild.lastChild.appendChild(createNode("form", "", ["formulario"], []));
+    contenedorMain.lastChild.lastChild.lastChild.appendChild(createNode("label", "Nombre de tienda", [], [{ name: "for", value: "nombreTienda" }]));
+    contenedorMain.lastChild.lastChild.lastChild.lastChild.appendChild(createNode("input", "", [], [{ name: "name", value: "nombreTienda" }]));
+    contenedorMain.lastChild.lastChild.lastChild.appendChild(createNode("label", "Dirección", [], [{ name: "for", value: "direccionTienda" }]));
+    contenedorMain.lastChild.lastChild.lastChild.lastChild.appendChild(createNode("input", "", [], [{ name: "name", value: "direccionTienda" }]));
+    contenedorMain.lastChild.lastChild.lastChild.appendChild(createNode("label", "Localidad", [], [{ name: "for", value: "localidadTienda" }]));
+    contenedorMain.lastChild.lastChild.lastChild.lastChild.appendChild(createNode("input", "", [], [{ name: "name", value: "localidadTienda" }]));
+    contenedorMain.lastChild.lastChild.lastChild.appendChild(createNode("label", "Teléfono", [], [{ name: "for", value: "telefonoTienda" }]));
+    contenedorMain.lastChild.lastChild.lastChild.lastChild.appendChild(createNode("input", "", [], [{ name: "name", value: "telefonoTienda" }]));
+    btnNuevaTienda.addEventListener('click', function () {
+        if (document.getElementsByClassName('contNuevaTienda')[0].classList.contains('oculto')){
+            document.getElementsByClassName('contNuevaTienda')[0].classList.remove('oculto');
+        }else{
+            document.getElementsByClassName('contNuevaTienda')[0].classList.add('oculto');
+        }
+    })
     contenedorMain.appendChild(createNode("div", "", ["listado"], []));
 }
 
@@ -88,18 +106,16 @@ function listaFetch() {
 
 function listaJQuery() {
     $.ajax({
-        url: urlTiendas, // URL de la petición
-        type: 'GET', // tipo de la petición: POST o GET
-        dataType: 'json', // tipo de dato que se espera
-        success: function (json) { // función a ejecutar si es satisfactoria
+        url: urlTiendas,
+        type: 'GET',
+        dataType: 'json',
+        success: function (json) {
             printLista(json)
         },
-        error: function (jqXHR, status, error) { // función error
+        error: function (jqXHR, status, error) {
             console.log('Disculpe, existió un problema')
         },
-        // función a ejecutar sin importar si la petición falló o no
         complete: function (jqXHR, status) {
-
         }
     })
 }
