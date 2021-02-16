@@ -39,11 +39,6 @@ button
     font-family: Oxygen Bold
     font-weight: bold
     margin: 10px
-    &:hover
-        background-color: $verdeMedio
-    &:active
-        background-color: $verdeOscuro
-        color: $verdeFlojo
 
 .seleccion
     margin-top: 200px
@@ -92,7 +87,7 @@ input
     margin-left: 85px
     margin-right: 85px
     border-radius: 15px
-
+    transition:
 .formulario
     display: flex
     flex-direction: row
@@ -103,14 +98,15 @@ input
     input
         width: 600px
         display: block
-        &:valid
-            border: 5px solid green
-        &:invalid
-            border: 5px solid red
     label
         font-family: Oxygen Bold
         color: $verdeOscuro
+        
+.valido, .valido:focus, .valido:hover
+    border: 5px solid green !important
 
+.invalido, .invalido:hover, .invalido:focus
+    border: 5px solid red !important
 .loader
     border: 16px solid #f3f3f3
     border-top: 16px solid $verdeOscuro
@@ -119,7 +115,7 @@ input
     height: 120px
     animation: spin 1.5s linear infinite
     margin-left: 48%
-    
+
 @keyframes spin
     0%
         transform: rotate(0deg)

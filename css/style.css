@@ -39,11 +39,6 @@ button {
   font-family: Oxygen Bold;
   font-weight: bold;
   margin: 10px; }
-  button:hover {
-    background-color: #bde1a6; }
-  button:active {
-    background-color: #234b0a;
-    color: #daeecc; }
 
 .seleccion {
   margin-top: 200px;
@@ -106,13 +101,15 @@ input {
   .formulario input {
     width: 600px;
     display: block; }
-    .formulario input:valid {
-      border: 5px solid green; }
-    .formulario input:invalid {
-      border: 5px solid red; }
   .formulario label {
     font-family: Oxygen Bold;
     color: #234b0a; }
+
+.valido, .valido:focus, .valido:hover {
+  border: 5px solid green !important; }
+
+.invalido, .invalido:hover, .invalido:focus {
+  border: 5px solid red !important; }
 
 .loader {
   border: 16px solid #f3f3f3;

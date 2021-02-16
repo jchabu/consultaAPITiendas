@@ -51,7 +51,6 @@ function imprimirForma() {
     contenedorMain.appendChild(createNode('div', '', ['navegacion'], []));
     contenedorMain.lastChild.appendChild(createNode('div', '', ['botones'], []));
     const btnNuevaTienda = createNode('button', 'Nueva Tienda', ['boton'], []);
-
     contenedorMain.lastChild.lastChild.appendChild(btnNuevaTienda);
     contenedorMain.lastChild.lastChild.appendChild(createNode('div', '', ['buscador'], []));
     const barraBusqueda = createNode('input', '', ['barraBusqueda'], [{ name: 'type', value: 'text' }]);
@@ -62,13 +61,13 @@ function imprimirForma() {
     contenedorMain.lastChild.appendChild(createNode('div', '', ['oculto', 'contNuevaTienda'], []));
     contenedorMain.lastChild.lastChild.appendChild(createNode('form', '', ['formulario'], []));
     contenedorMain.lastChild.lastChild.lastChild.appendChild(createNode('label', 'Nombre de tienda', [], [{ name: 'for', value: 'nombreTienda' }]));
-    contenedorMain.lastChild.lastChild.lastChild.lastChild.appendChild(createNode('input', '', [], [{ name: 'name', value: 'nombreTienda' }, { name: 'required', value: '' }]));
+    contenedorMain.lastChild.lastChild.lastChild.lastChild.appendChild(createNode('input', '', [], [{ name: 'name', value: 'nombreTienda' }, { name: 'required', value: '' }, { name: 'id', value: 'nombreTienda' }]));
     contenedorMain.lastChild.lastChild.lastChild.appendChild(createNode('label', 'Dirección', [], [{ name: 'for', value: 'direccionTienda' }]));
-    contenedorMain.lastChild.lastChild.lastChild.lastChild.appendChild(createNode('input', '', [], [{ name: 'name', value: 'direccionTienda' }, { name: 'required', value: '' }]));
+    contenedorMain.lastChild.lastChild.lastChild.lastChild.appendChild(createNode('input', '', [], [{ name: 'name', value: 'direccionTienda' }, { name: 'required', value: '' }, { name: 'id', value: 'direccionTienda' }]));
     contenedorMain.lastChild.lastChild.lastChild.appendChild(createNode('label', 'Localidad', [], [{ name: 'for', value: 'localidadTienda' }]));
-    contenedorMain.lastChild.lastChild.lastChild.lastChild.appendChild(createNode('input', '', [], [{ name: 'name', value: 'localidadTienda' }, { name: 'required', value: '' }]));
+    contenedorMain.lastChild.lastChild.lastChild.lastChild.appendChild(createNode('input', '', [], [{ name: 'name', value: 'localidadTienda' }, { name: 'required', value: '' }, { name: 'id', value: 'localidadTienda' }]));
     contenedorMain.lastChild.lastChild.lastChild.appendChild(createNode('label', 'Teléfono', [], [{ name: 'for', value: 'telefonoTienda' }]));
-    contenedorMain.lastChild.lastChild.lastChild.lastChild.appendChild(createNode('input', '', [], [{ name: 'name', value: 'telefonoTienda' }, { name: 'required', value: '' }, { name: 'pattern', value: '[0-9]{9}' }]));
+    contenedorMain.lastChild.lastChild.lastChild.lastChild.appendChild(createNode('input', '', [], [{ name: 'name', value: 'telefonoTienda' }, { name: 'required', value: '' }, { name: 'id', value: 'telefonoTienda' }, { name: 'pattern', value: '[689][0-9]{8}' }]));
     contenedorMain.lastChild.lastChild.appendChild(createNode('button', 'Crear tienda', ['botonNuevaTienda', 'boton'], []));
     btnNuevaTienda.addEventListener('click', () => {
         if (document.getElementsByClassName('contNuevaTienda')[0].classList.contains('oculto')) {
@@ -109,7 +108,51 @@ function limpiarMain() {
 function limpiarLista() {
     contenedorMain.lastChild.removeChild(contenedorMain.lastChild.lastChild);
 }
-
+/**
+ * Funcion para añadir al boton de nueva tienda un addeventlistener a la vez que recoge los datos de los campos
+ * @param {string} tipo
+ */
+function enviarTienda(tipo) {
+    const botonNuevaTienda = document.getElementsByClassName('botonNuevaTienda')[0];
+    if (tipo === 'JQuery') {
+        botonNuevaTienda.addEventListener('click', () => {
+            const objetPost = {
+                nombreTienda: document.getElementById('nombreTienda').value,
+                direccion: document.getElementById('direccionTienda').value,
+                localidad: document.getElementById('localidadTienda').value,
+                telefono: document.getElementById('telefonoTienda').value
+            };
+            postJQuery(objetPost);
+            listaJQuery('');
+        });
+    } else if (tipo === 'Fetch') {
+        botonNuevaTienda.addEventListener('click', () => {
+            const objetPost = {
+                nombreTienda: document.getElementById('nombreTienda').value,
+                direccion: document.getElementById('direccionTienda').value,
+                localidad: document.getElementById('localidadTienda').value,
+                telefono: document.getElementById('telefonoTienda').value
+            };
+            postFetch(objetPost);
+            listaFetch('');
+        });
+    } else if (tipo === 'XHR') {
+        botonNuevaTienda.addEventListener('click', () => {
+            const objetPost = {
+                nombreTienda: document.getElementById('nombreTienda').value,
+                direccion: document.getElementById('direccionTienda').value,
+                localidad: document.getElementById('localidadTienda').value,
+                telefono: document.getElementById('telefonoTienda').value
+            };
+            postXHR(objetPost);
+            listaXHR('');
+        });
+    }
+}
+/**
+ * Funcion para hacer el intercambio de iconos en el icono de búsqueda así como añadir la funcionalidad para reiniciar la vista
+ * @param {string} tipo
+ */
 function cambiarBotonBusqueda(tipo) {
     const contenedorBusqueda = document.getElementsByClassName('buscador')[0];
     contenedorBusqueda.removeChild(contenedorBusqueda.lastChild);
@@ -126,7 +169,7 @@ function cambiarBotonBusqueda(tipo) {
             const botonBusqueda = createNode('button', '', ['botonBusqueda'], []);
             contenedorBusqueda.appendChild(botonBusqueda);
             botonBusqueda.appendChild(createNode('i', '', ['fas', 'fa-search'], []));
-            listaXHR('');
+            listaJQuery('');
         });
     } else if (tipo === 'Fetch') {
         botonNuevoBusqueda.addEventListener('click', () => {
@@ -196,10 +239,21 @@ function listaXHR(terminacion) {
             stopLoader();
             printLista(data);
             eventoBusqueda('XHR');
+            enviarTienda('XHR');
         } catch (err) {
-            console.error(err);
+            contenedorMain.lastChild.appendChild(createNode('h2', 'Tienda no encontrada', ['error'], []));
         }
     };
+}
+/**
+ *
+ * @param {object} objeto
+ */
+function postXHR(objeto) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', urlTiendas);
+    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.send(JSON.stringify(objeto));
 }
 
 /**
@@ -208,8 +262,22 @@ function listaXHR(terminacion) {
 function listaFetch(terminacion) {
     fetch(urlTiendas + terminacion)
         .then((response) => response.json())
-        .then((data) => { stopLoader(); printLista(data); eventoBusqueda('Fetch'); })
-        .catch((error) => console.log(error));
+        .then((data) => { stopLoader(); printLista(data); eventoBusqueda('Fetch'); enviarTienda('Fetch'); })
+        .catch(() => contenedorMain.lastChild.appendChild(createNode('h2', 'Tienda no encontrada', ['error'], [])));
+}
+/**
+ * Función para hacer el POST con Fetch
+ * @param {object} objeto
+ */
+function postFetch(objeto) {
+    fetch(urlTiendas, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(objeto)
+    })
+        .then(listaFetch(''));
 }
 
 /**
@@ -224,12 +292,28 @@ function listaJQuery(terminacion) {
             stopLoader();
             printLista(json);
             eventoBusqueda('JQuery');
+            enviarTienda('JQuery');
         },
         error() {
-            console.log('Disculpe, existió un problema');
+            contenedorMain.lastChild.appendChild(createNode('h2', 'Tienda no encontrada', ['error'], []));
         },
         complete() {
         }
+    });
+}
+/**
+ * Función para hacer POST con jQuery
+ * @param {object} objeto
+ */
+function postJQuery(objeto) {
+    $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        url: urlTiendas,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: JSON.stringify(objeto)
     });
 }
 /**
