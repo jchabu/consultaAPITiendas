@@ -30,12 +30,8 @@ function createNode(name, content, classes, attributes) {
  * Función para añadir un div con el loader
  * @param {*} contenedor
  */
-function startLoader(contenedor, tipoLoader) {
-    if (tipoLoader === 'loaderMini') {
-        contenedor.appendChild(createNode('div', '', ['loaderMini'], []));
-    } else {
-        contenedor.appendChild(createNode('div', '', ['loader'], []));
-    }
+function startLoader(contenedor) {
+    contenedor.appendChild(createNode('div', '', ['loader'], []));
 }
 /**
  * Función para quitar loader donde sea
@@ -207,18 +203,21 @@ function eventoBusqueda(tipo) {
     if (tipo === 'XHR') {
         botonBusqueda.addEventListener('click', () => {
             limpiarLista();
+            startLoader(botonBusqueda, '');
             listaXHR(inputBusqueda.value);
             cambiarBotonBusqueda('XHR');
         });
     } else if (tipo === 'Fetch') {
         botonBusqueda.addEventListener('click', () => {
             limpiarLista();
+            startLoader(botonBusqueda, '');
             listaFetch(inputBusqueda.value);
             cambiarBotonBusqueda('Fetch');
         });
     } else if (tipo === 'JQuery') {
         botonBusqueda.addEventListener('click', () => {
             limpiarLista();
+            startLoader(botonBusqueda, '');
             listaJQuery(inputBusqueda.value);
             cambiarBotonBusqueda('JQuery');
         });

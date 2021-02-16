@@ -81,7 +81,8 @@ input {
   margin-right: -5px; }
 
 .buscador .botonBusqueda {
-  width: 3em;
+  max-width: 3em;
+  max-height: 3em;
   margin-left: 0;
   margin-top: 15px; }
 
