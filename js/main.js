@@ -68,8 +68,10 @@ function imprimirForma() {
     btnNuevaTienda.addEventListener('click', () => {
         if (document.getElementsByClassName('contNuevaTienda')[0].classList.contains('oculto')) {
             document.getElementsByClassName('contNuevaTienda')[0].classList.remove('oculto');
+            document.getElementsByClassName('contNuevaTienda')[0].classList.add('activo');
         } else {
             document.getElementsByClassName('contNuevaTienda')[0].classList.add('oculto');
+            document.getElementsByClassName('contNuevaTienda')[0].classList.remove('activo');
         }
     });
 }

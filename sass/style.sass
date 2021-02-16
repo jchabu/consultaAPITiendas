@@ -7,6 +7,7 @@ $blanco: white
     font-family: Oxygen Bold
     font-style: normal
     src: url("../fonts/Oxygen-Bold.ttf")
+
 @font-face
     font-family: Oxygen Regular
     font-style: normal
@@ -66,6 +67,29 @@ button
 
 .oculto
     display: none
+    transform: scale(0)
+    opacity: 0
+    transition: transform 0.5s linear, opacity 0.5s linear
+
+.activo
+    display: block
+    transform: scale(1)
+    opacity: 1
+    animation: grow 0.5s linear
+
+@keyframes grow
+    0%
+        display: none
+        opacity: 0
+
+    1%
+        display: block
+        opacity: 0
+        transform: scale(0)
+
+    100%
+        opacity: 1
+        transform: scale(1)
 
 .botones
     display: flex
@@ -102,7 +126,7 @@ input
     label
         font-family: Oxygen Bold
         color: $verdeOscuro
-        
+
 .valido, .valido:focus, .valido:hover
     border: 5px solid green !important
 
