@@ -30,6 +30,11 @@ gulp.task('lint', function() {
       .pipe(browserSync.stream());
   });
 
+gulp.task('doc', function (cb){
+    gulp.src('js/*.js')
+    .pipe(jsdoc(cb));
+});
+
 //Watcher
 gulp.task('watch', function () {
     gulp.watch('sass/**/*.sass', gulp.series(['sass']));
