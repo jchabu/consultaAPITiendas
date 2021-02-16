@@ -103,18 +103,23 @@ input
     input
         width: 600px
         display: block
+        &:valid
+            border: 5px solid green
+        &:invalid
+            border: 5px solid red
     label
         font-family: Oxygen Bold
         color: $verdeOscuro
 
 .loader
     border: 16px solid #f3f3f3
-    border-top: 16px solid #3498db
+    border-top: 16px solid $verdeOscuro
     border-radius: 50%
     width: 120px
     height: 120px
-    animation: spin 2s linear infinite
+    animation: spin 1.5s linear infinite
     margin-left: 48%
+    
 @keyframes spin
     0%
         transform: rotate(0deg)
